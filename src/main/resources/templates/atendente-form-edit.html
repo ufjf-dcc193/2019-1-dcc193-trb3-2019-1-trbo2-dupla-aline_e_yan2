@@ -1,8 +1,7 @@
 <div th:replace="fragments/cabecalhoatendente :: cabecalhoatendente"></div>
 <h4>Crie sua conta Atendente</h4>
 
-<form th:action="@{/atendente/nova.html}" th:object="${atendente}" method="POST">
-    <div class=" row form-group">
+<form th:action="@{/atendente/editar{id}(id=*{id})}" th:object="${atendente}" method="POST">    <div class=" row form-group">
         <div class="col-md-6">
             <label>Nome Completo</label>
                 <input type="text" name="nomeCompleto" class="form-control" th:field="*{nomeCompleto}" />
@@ -42,7 +41,7 @@
     
     <button type="submit" class="btn btn-info">Salvar</button>
     <button type="reset" class="btn btn-secondary">Limpar</button>
-    <a th:href="@{/login.html}" class="btn btn-dark">Cancelar</a> 
+    <a th:href="@{/atendente/listar.html}" class="btn btn-dark">Cancelar</a> 
 </form>
 
 

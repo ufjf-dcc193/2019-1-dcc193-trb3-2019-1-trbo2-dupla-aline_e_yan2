@@ -1,0 +1,25 @@
+<div th:replace="fragments/cabecalho:: cabecalho"></div>
+<h4>Crie Categoria</h4>
+
+<form th:action="@{/categoria/nova.html}" th:object="${categoria}" method="POST">
+    <div class=" row form-group">
+        <div class="col-md-6">
+            <label>E-mail</label>
+            <input type="text" name="titulo" class="form-control" th:field="*{titulo}">
+            <strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong>
+        </div>
+    </div>
+    <div class=" row form-group">
+        <div class="col-md-6">
+            <label>E-mail</label>
+            <input type="text" name="descricaoTextual" class="form-control" th:field="*{descricaoTextual}">
+            <strong th:if="${#fields.hasErrors('descricaoTextual')}" th:errors="*{descricaoTextual}"></strong>
+        </div>
+    </div>
+
+<button type="submit" class="btn btn-info">Salvar</button>
+<button type="reset" class="btn btn-secondary">Limpar</button>
+<a th:href="@{/categoria/listar.html}" class="btn btn-dark">Cancelar</a> 
+</form>
+
+<div th:replace="fragments/rodape :: rodape"></div>

@@ -1,0 +1,33 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<div class="panel panel-default" style="margin: 10px">
+    <div class="panel-heading">
+        <h5 class="panel-title">Lista de categorias</h5>
+    </div>
+    <div class="panel-body">
+        <table class="table" style = "max-width:80%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Descrição Textual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="categoria:${categorias}" th:object=${categoria}>
+                    <td th:text=*{id}></td>
+                    <td th:text=*{titulo}></td>
+                    <td th:text=*{descricaoTextual}></td>
+                    <td><a th:href="@{/categoria/editar.html(id=${categoria.id})}">
+                        <button>Editar</button></a></td>
+                    <td><a th:href="@{/categoria/excluir.html(id=${categoria.id})}">
+                        <button>Excluir</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+    </div>
+    </div>
+</div>
+
+<div th:replace="fragments/rodape :: rodape"></div>

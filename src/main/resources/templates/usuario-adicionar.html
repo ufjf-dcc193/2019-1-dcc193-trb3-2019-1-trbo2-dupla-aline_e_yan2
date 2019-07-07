@@ -1,0 +1,48 @@
+<div th:replace="fragments/cabecalho:: cabecalho"></div>
+<h4>Crie Usuário</h4>
+
+<form th:action="@{/usuario/nova.html}" th:object="${usuario}" method="POST">
+    <div class=" row form-group">
+    <div class="col-md-6">
+        <label>Nome Completo</label>
+            <input type="text" name="nomeCompleto" class="form-control" th:field="*{nomeCompleto}" />
+        <strong th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}"></strong>
+    </div> 
+</div>
+<div class=" row form-group">
+        <div class="col-md-6">
+            <label>Setor</label>
+            <input type="text" name="setor" class="form-control" th:field="*{setor}"/>
+            <strong th:if="${#fields.hasErrors('setor')}" th:errors="*{setor}"></strong>
+        </div>
+</div>
+<div class=" row form-group">
+        <div class="col-md-6">
+                <label>Telefone Fixo</label>
+                <input type="text" name="codigoVinculo" class="form-control" th:field="*{codigoVinculo}"/>
+                <strong th:if="${#fields.hasErrors('codigoVinculo')}" th:errors="*{codigoVinculo}"></strong>
+        </div>
+</div>
+
+<div class=" row form-group">
+ <div class="col-md-6">
+        <label>Telefone Celular</label>
+         <input type="text" name="celular" class="form-control" th:field="*{celular}"/>
+         <strong th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}"></strong>
+</div>
+    </div>
+
+<div class=" row form-group">
+    <div class="col-md-6">
+        <label>E-mail</label>
+        <input type="text" name="email" class="form-control" th:field="*{email}">
+        <strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-info">Salvar</button>
+<button type="reset" class="btn btn-secondary">Limpar</button>
+<a th:href="@{/atendente/listar.html}" class="btn btn-dark">Cancelar</a> 
+</form>
+
+<div th:replace="fragments/rodape :: rodape"></div>

@@ -1,0 +1,40 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<div class="panel panel-default" style="margin: 10px">
+    <div class="panel-heading">
+        <h5 class="panel-title">Lista de Atendentes</h5>
+    </div>
+    <div class="panel-body">
+        <table class="table" style = "max-width:80%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome Completo</th>
+                    <th>Código de Acesso</th>
+                    <th>Telefone</th>
+                    <th>Celular</th>
+                    <th>E-mail</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="atendente:${atendentes}" th:object=${atendente}>
+                    <td th:text=*{id}></td>
+                    <td th:text=*{nomeCompleto}></td>
+                    <td th:text=*{codigoAcesso}></td>
+                    <td th:text=*{telefone}></td>
+                    <td th:text=*{celular}></td>
+                    <td th:text=*{email}></td>
+                    <td><a th:href="@{/usuario/editar.html(id=${atendente.id})}">
+                        <button>Editar</button></a></td>
+                    <td><a th:href="@{/usuario/excluir.html(id=${atendente.id})}">
+                        <button>Excluir</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+    </div>
+    </div>
+</div>
+
+<div th:replace="fragments/rodape :: rodape"></div>

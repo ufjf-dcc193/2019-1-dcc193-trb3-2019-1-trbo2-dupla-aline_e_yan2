@@ -1,8 +1,8 @@
-<div th:replace="fragments/cabecalhoatendente :: cabecalhoatendente"></div>
-<h4>Crie sua conta Atendente</h4>
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+<h4>Crie Usuário</h4>
 
-<form th:action="@{/atendente/nova.html}" th:object="${atendente}" method="POST">
-    <div class=" row form-group">
+<form th:action="@{/usuario/editar{id}(id=*{id})}" th:object="${usuario}" method="POST">   
+     <div class=" row form-group">
         <div class="col-md-6">
             <label>Nome Completo</label>
                 <input type="text" name="nomeCompleto" class="form-control" th:field="*{nomeCompleto}" />
@@ -11,16 +11,16 @@
     </div>
     <div class=" row form-group">
             <div class="col-md-6">
-                <label>Codigo para seu Acesso</label>
-                <input type="text" name="codigoAcesso" class="form-control" th:field="*{codigoAcesso}"/>
-                <strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong>
+                <label>Setor</label>
+                <input type="text" name="setor" class="form-control" th:field="*{setor}"/>
+                <strong th:if="${#fields.hasErrors('setor')}" th:errors="*{setor}"></strong>
             </div>
     </div>
     <div class=" row form-group">
             <div class="col-md-6">
                     <label>Telefone Fixo</label>
-                    <input type="text" name="telefone" class="form-control" th:field="*{telefone}"/>
-                    <strong th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></strong>
+                    <input type="text" name="codigoVinculo" class="form-control" th:field="*{codigoVinculo}"/>
+                    <strong th:if="${#fields.hasErrors('codigoVinculo')}" th:errors="*{codigoVinculo}"></strong>
             </div>
     </div>
 
@@ -42,7 +42,7 @@
     
     <button type="submit" class="btn btn-info">Salvar</button>
     <button type="reset" class="btn btn-secondary">Limpar</button>
-    <a th:href="@{/login.html}" class="btn btn-dark">Cancelar</a> 
+    <a th:href="@{/atendente/listar.html}" class="btn btn-dark">Cancelar</a> 
 </form>
 
 
