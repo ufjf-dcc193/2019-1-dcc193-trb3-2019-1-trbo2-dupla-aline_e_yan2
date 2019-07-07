@@ -58,7 +58,7 @@ public class AtendenteControlador {
         }
 
         repositorio.save(atendente);
-        mv.setViewName("redirect:/");
+        mv.setViewName("redirect:/login.html");
         return mv;
     }
 

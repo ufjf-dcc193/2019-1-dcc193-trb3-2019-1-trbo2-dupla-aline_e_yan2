@@ -1,0 +1,13 @@
+<div th:replace="fragments/cabecalhologin :: cabecalhologin"></div>
+<div class="container">
+    <form class="form-signin" th:action="@{/home}" method="post">
+        <h4 class="form-signin-heading">Por favor, faça seu Login.</h4>
+        <input type="text" class="form-control" placeholder="Endereço de Email" 
+        id="email" name="email" />
+        <input type="password" class="form-control" placeholder="Código de Acesso"
+         id="codigoAcesso" name="codigoAcesso"/> 
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
+        <a href="/atendente/nova.html"><h5>Criar Nova Conta</h5></a>
+    </form>
+</div>
+<div th:replace="fragments/rodape :: rodape"></div>
