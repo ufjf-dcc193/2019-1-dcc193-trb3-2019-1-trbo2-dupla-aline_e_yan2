@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trabalho Opcional</title>
+</head>
+<body>
+    <div th:fragment="cabecalho">
+<nav class="navbar navbar-light bg-light navbar-expand-lg">
+    <a class="navbar-brand" href="/home">Página Inicial</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/atendimento/}">Atendimento</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/evento/}">Evento</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/usuario/}">Usuário</a>
+            </li>        <li class="nav-item">
+                <a class="nav-link" th:href="@{/atendente/}">Atendente</a>
+            </li>        <li class="nav-item">
+                <a class="nav-link" th:href="@{/categoria/}">Categoria</a>
+            </li>
+            <li th:if="${login} != 0" class="nav-item">
+                <a class="nav-link" th:href="@{/areas/minhas-areas}">Minhas Areas</a>
+            </li>
+            <!-- <li th:if="${login} != 0" class="nav-item">
+                <a class="nav-link" th:href="@{/revisao/por-avaliador/{id}(id = ${login})}">Revisões por Avaliador</a>
+            </li>
+            <li th:if="${login} == 0" class="nav-item mr-sm-2">
+                <a class="nav-link" th:href="@{/login/}">Logar</a>
+            </li>
+
+            <li th:if="${login} != 0" class="nav-item mr-sm-2">
+                <a class="nav-link" th:href="@{/login/sair}">Sair</a> -->
+            <!-- </li> -->
+        </ul>
+    </div>
+</nav>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<br/>
+</div>
+</body>
