@@ -43,7 +43,7 @@ public class AtendenteControlador {
         List<Atendente> atendentes = repositorio.findAll();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("lista-atendente.html");
-        mv.addObject("atendente", atendentes);
+        mv.addObject("atendentes", atendentes);
         return mv;
 
     }

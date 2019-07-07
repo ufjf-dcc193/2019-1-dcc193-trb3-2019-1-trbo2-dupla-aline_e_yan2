@@ -1,5 +1,6 @@
 package br.com.dcc193.trabalhoop.Controlador;
 import java.util.List;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -40,7 +41,7 @@ public class UsuarioControlador {
         List<Usuario> usuarios = repositorio.findAll();
         ModelAndView mv = new ModelAndView();
         mv.setViewName("lista-usuario.html");
-        mv.addObject("usuario", usuarios);
+        mv.addObject("usuarios", usuarios);
         return mv;
 
     }
@@ -55,15 +56,16 @@ public class UsuarioControlador {
         }
 
         repositorio.save(usuario);
-        mv.setViewName("redirect:/listar.html");
+        mv.setViewName("redirect:/usuario/listar.html");
         return mv;
     }
 
     @GetMapping("/nova.html")
     public ModelAndView criar() {
         ModelAndView mv = new ModelAndView();
+        String codigoVinculo = String.valueOf(Long.toHexString(new Random().nextLong()));
         mv.setViewName("usuario-adicionar.html");
-        mv.addObject("usuario", new Usuario("nomeCompleto","setor","codigoVinculo","telefone","celular","email"));
+        mv.addObject("usuario", new Usuario("nomeCompleto","setor",codigoVinculo,"telefone","celular","email"));
         return mv;
     }
 
@@ -85,7 +87,7 @@ public class UsuarioControlador {
             return mv;
         }
         repositorio.save(usuario);
-        mv.setViewName("redirect:listar.html");
+        mv.setViewName("redirect:/usuario/listar.html");
         return mv;
     }
 

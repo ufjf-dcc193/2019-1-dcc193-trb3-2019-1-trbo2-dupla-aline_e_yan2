@@ -38,7 +38,7 @@ public class CategoriaControlador {
        List<Categoria> categorias = repositorio.findAll();
        ModelAndView mv = new ModelAndView();
        mv.setViewName("lista-categoria.html");
-       mv.addObject("categoria", categorias);
+       mv.addObject("categorias", categorias);
        return mv;
 
    }
@@ -53,7 +53,7 @@ public class CategoriaControlador {
        }
 
        repositorio.save(categoria);
-       mv.setViewName("redirect:/login.html");
+       mv.setViewName("redirect:/categoria/listar.html");
        return mv;
    }
 

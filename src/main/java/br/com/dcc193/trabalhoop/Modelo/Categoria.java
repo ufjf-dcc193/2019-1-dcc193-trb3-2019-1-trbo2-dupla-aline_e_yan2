@@ -33,8 +33,34 @@ public class Categoria {
 
     @Override
     public String toString() {
-        return "Categoria [ descricaoTextual=" + descricaoTextual + ", titulo=" + titulo + "]";
+        return "Categoria [Id=" + Id + ", descricaoTextual=" + descricaoTextual + ", titulo=" + titulo + "]";
     }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricaoTextual() {
+        return descricaoTextual;
+    }
+
+    public void setDescricaoTextual(String descricaoTextual) {
+        this.descricaoTextual = descricaoTextual;
+    }
+
+    
 
     
 

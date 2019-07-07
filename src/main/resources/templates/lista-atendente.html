@@ -25,9 +25,9 @@
                     <td th:text=*{telefone}></td>
                     <td th:text=*{celular}></td>
                     <td th:text=*{email}></td>
-                    <td><a th:href="@{/usuario/editar.html(id=${atendente.id})}">
+                    <td><a th:href="@{/atendente/editar.html(id=${atendente.id})}">
                         <button>Editar</button></a></td>
-                    <td><a th:href="@{/usuario/excluir.html(id=${atendente.id})}">
+                    <td><a th:href="@{/atendente/excluir.html(id=${atendente.id})}">
                         <button>Excluir</button></a></td>
                 </tr>
             </tbody>

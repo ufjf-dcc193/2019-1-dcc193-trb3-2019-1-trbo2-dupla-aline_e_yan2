@@ -18,7 +18,7 @@
 </div>
 <div class=" row form-group">
         <div class="col-md-6">
-                <label>Telefone Fixo</label>
+                <label>Codigo Vínculo</label>
                 <input type="text" name="codigoVinculo" class="form-control" th:field="*{codigoVinculo}"/>
                 <strong th:if="${#fields.hasErrors('codigoVinculo')}" th:errors="*{codigoVinculo}"></strong>
         </div>
@@ -32,6 +32,14 @@
 </div>
     </div>
 
+    <div class=" row form-group">
+        <div class="col-md-6">
+               <label>Telefone</label>
+                <input type="text" name="telefone" class="form-control" th:field="*{telefone}"/>
+                <strong th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></strong>
+       </div>
+           </div>
+
 <div class=" row form-group">
     <div class="col-md-6">
         <label>E-mail</label>
@@ -42,7 +50,7 @@
 
 <button type="submit" class="btn btn-info">Salvar</button>
 <button type="reset" class="btn btn-secondary">Limpar</button>
-<a th:href="@{/atendente/listar.html}" class="btn btn-dark">Cancelar</a> 
+<a th:href="@{/usuario/listar.html}" class="btn btn-dark">Cancelar</a> 
 </form>
 
 <div th:replace="fragments/rodape :: rodape"></div>
