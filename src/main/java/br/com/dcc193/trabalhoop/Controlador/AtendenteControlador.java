@@ -42,7 +42,7 @@ public class AtendenteControlador {
     public ModelAndView listar() {
         List<Atendente> atendentes = repositorio.findAll();
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("lista-usuario.html");
+        mv.setViewName("lista-atendente.html");
         mv.addObject("atendente", atendentes);
         return mv;
 
@@ -58,7 +58,7 @@ public class AtendenteControlador {
         }
 
         repositorio.save(atendente);
-        mv.setViewName("redirect:/login.html");
+        mv.setViewName("redirect:/");
         return mv;
     }
 
@@ -66,8 +66,8 @@ public class AtendenteControlador {
     public ModelAndView criar() {
         ModelAndView mv = new ModelAndView();
         String codigoAcesso = String.valueOf(Long.toHexString(new Random().nextLong()));
-        mv.setViewName("usuario-adicionar.html");
-        mv.addObject("usuario", new Atendente("nomeCompleto",codigoAcesso,"telefone", "celular","email"));
+        mv.setViewName("atendente-adicionar.html");
+        mv.addObject("atendente", new Atendente("nomeCompleto",codigoAcesso,"telefone", "celular","email"));
         return mv;
     }
 

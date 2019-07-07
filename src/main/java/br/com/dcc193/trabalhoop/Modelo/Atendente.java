@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -21,7 +22,7 @@ public class Atendente {
     private String nomeCompleto;
 
     @NotBlank
-    private String nomeAcesso;
+    private String codigoAcesso;
 
     @NotBlank
     private String telefone;
@@ -30,19 +31,22 @@ public class Atendente {
     private String celular;
 
     @NotBlank
+    @Email
     private String email;
 
     public Atendente() {
     }
 
-    public Atendente(@NotBlank String nomeCompleto, @NotBlank String nomeAcesso, @NotBlank String telefone,
+    public Atendente(@NotBlank String nomeCompleto, @NotBlank String codigoAcesso, @NotBlank String telefone,
             @NotBlank String celular, @NotBlank String email) {
         this.nomeCompleto = nomeCompleto;
-        this.nomeAcesso = nomeAcesso;
+        this.codigoAcesso = codigoAcesso;
         this.telefone = telefone;
         this.celular = celular;
         this.email = email;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -60,12 +64,12 @@ public class Atendente {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public String getNomeAcesso() {
-        return nomeAcesso;
+    public String getCodigoAcesso() {
+        return codigoAcesso;
     }
 
-    public void setNomeAcesso(String nomeAcesso) {
-        this.nomeAcesso = nomeAcesso;
+    public void setCodigoAcesso(String codigoAcesso) {
+        this.codigoAcesso = codigoAcesso;
     }
 
     public String getTelefone() {
@@ -94,8 +98,13 @@ public class Atendente {
 
     @Override
     public String toString() {
-        return "Atendente [celular=" + celular + ", email=" + email + ", id=" + id + ", nomeAcesso=" + nomeAcesso
+        return "Atendente [celular=" + celular + ", email=" + email + ", id=" + id + ", codigoAcesso=" + codigoAcesso
                 + ", nomeCompleto=" + nomeCompleto + ", telefone=" + telefone + "]";
+    }
+
+    public Atendente(@NotBlank String codigoAcesso, @NotBlank String email) {
+        this.codigoAcesso = codigoAcesso;
+        this.email = email;
     }
     
 }
