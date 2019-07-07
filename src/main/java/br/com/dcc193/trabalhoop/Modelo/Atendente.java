@@ -1,4 +1,5 @@
 package br.com.dcc193.trabalhoop.Modelo;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

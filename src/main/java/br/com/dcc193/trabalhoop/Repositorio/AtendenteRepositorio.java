@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import br.com.dcc193.trabalhoop.Modelo.Atendente;
 
 
+
 /**
  * AtendenteRepositorio
  */
