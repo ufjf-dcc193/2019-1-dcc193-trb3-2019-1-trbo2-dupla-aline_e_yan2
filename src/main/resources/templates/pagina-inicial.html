@@ -1,3 +1,5 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
-<h2>Olá Bem Vindo ao Sistema!</h2>
+<div th:object="${atendente}">
+    <h2>Olá Bem <span th:text="*{nomeCompleto}"></span> Vindo ao Sistema!</h2>
+</div>
 <div th:replace="fragments/rodape :: rodape"></div>
