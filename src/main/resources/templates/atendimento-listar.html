@@ -1,0 +1,40 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<div class="panel panel-default" style="margin: 10px">
+    <div class="panel-heading">
+        <h5 class="panel-title">Lista de Atendentes</h5>
+    </div>
+    <div class="panel-body">
+        <table class="table" style = "max-width:80%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Categoria</th>
+                    <th>Data/Hora Criação</th>
+                    <th>Data/Hora Fechamento</th>
+                    <th>Descrição Textual</th>
+                    <th>Usuario</th>
+                    <th>Atendente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="atendimento:${atendimentos}" th:object=${atendimento}>
+                    <td th:text=*{id}></td>
+                    <!-- <td th:text=*{catopcao.titulo}></td> -->
+                    <td th:text=*{dataFechamento}></td>
+                    <td th:text=*{dataCriacao}></td>
+                    <td th:text=*{descricaoTextual}></td>
+                    <!-- <td th:text=*{usinopcao.nomeCompleto}></td>
+                    <td th:text=*{atenopcao.nomeCompleto}></td> -->
+                    <td><a th:href="@{/atendimento/editar.html(id=${atendimento.id})}">
+                        <button>Atualizar</button></a></td>
+                   
+                </tr>
+            </tbody>
+        </table>
+        <div>
+    </div>
+    </div>
+</div>
+
+<div th:replace="fragments/rodape :: rodape"></div>

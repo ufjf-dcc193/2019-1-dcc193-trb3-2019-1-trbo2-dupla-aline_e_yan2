@@ -1,0 +1,65 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+
+<form th:action="@{/atendimento/editar{id}(id=*{id})}" th:object="${atendimento}" method="POST">   
+          <div class="row form-group">
+            <div class="col-md-8">
+                <label>Atendente: <select class="form-control" th:field="*{idAtendente}">
+                        <option th:each="atopcao : ${atopcoes}" 
+                                th:field="*{idAtendente}"
+                                th:value="${atopcao.id}"
+                                th:text="${atopcao.nomeCompleto}"
+                                >
+                        </option>
+                    </select></label>
+    
+            </div>
+            <div class="col-md-8">
+                <label>Categoria: <select class="form-control" th:field="*{idCategoria}">
+                        <option th:each="catopcao : ${catopcoes}"
+                                th:field="*{idCategoria}"
+                                th:value="${catopcao.id}"
+                                th:text="${catopcao.titulo}">
+                        </option>
+                    </select></label>
+    
+            </div>
+            <div class="col-md-8">
+                <label>Usuário: <select class="form-control" th:field="*{idUsuario}">
+                        <option th:field="*{idUsuario}" 
+                                th:value="null">Selecione um usuario </option>
+                        <option th:each="usinopcao : ${usinopcoes}"
+                                th:field="*{idUsuario}"
+                                th:value="${usinopcao.id}"
+                                th:text="${usinopcao.nomeCompleto}"></option>
+                    </select></label>
+    
+            </div>
+            <div class="col-md-6">
+                <label>Descrição Textual</label>
+                <input type="text" name="descricaoTextual" class="form-control" th:field="${atendimento.descricaoTextual}" />
+                <strong th:if="${#fields.hasErrors('descricaoTextual')}" th:errors="${atendimento.descricaoTextual}"></strong>
+            </div> 
+    
+            
+        </div>
+        <button type="submit" class="btn btn-info">Salvar</button>
+        <button type="reset" class="btn btn-secondary">Limpar</button>
+        <a th:href="@{/atendimento/listar.html}" class="btn btn-dark">Cancelar</a> 
+    </form>
+    <div class="col-md-8">
+        <label>Usuário: <select class="form-control" th:field="*{status}">
+                <option th:field="*{status}">Revisão</option> 
+                <option th:field="*{status}">Aberto</option>
+                <option th:field="*{status}">Bloqueado</option> 
+                <option th:field="*{status}">Em Andamento</option>
+                <option th:field="*{status}">Fechado</option> 
+            </select></label>
+
+    </div>
+    
+    <div th:replace="fragments/rodape :: rodape"></div>
+
+
+
+
