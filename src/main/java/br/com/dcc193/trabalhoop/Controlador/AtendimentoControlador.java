@@ -1,5 +1,6 @@
 package br.com.dcc193.trabalhoop.Controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,9 +90,11 @@ public class AtendimentoControlador {
         mv.addObject("atendimento",atendimento);
         return mv;
     }
-    //gambs
+    //
+    //pegando o cont de atendimentos por usuarios 
+    //
     private List<Integer> atendimentos(){
-        List<Integer> atendimentos;
+        List<Integer> atendimentos = new ArrayList<>();
         for (Usuario u : atRepositorio.getListUsuariosInAtendimento()) {
             atendimentos.add(atRepositorio.countAtendimentoByidUsuario(u));                    
         }

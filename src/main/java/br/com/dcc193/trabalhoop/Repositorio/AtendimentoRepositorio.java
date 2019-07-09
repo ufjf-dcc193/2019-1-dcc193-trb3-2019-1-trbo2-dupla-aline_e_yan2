@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.dcc193.trabalhoop.Modelo.Atendente;
 import br.com.dcc193.trabalhoop.Modelo.Atendimento;
-import br.com.dcc193.trabalhoop.Modelo.Categoria;
 import br.com.dcc193.trabalhoop.Modelo.Usuario;
 
 
