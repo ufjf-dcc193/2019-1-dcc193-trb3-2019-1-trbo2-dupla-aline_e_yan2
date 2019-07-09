@@ -11,6 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.util.Date;
 
 /**
@@ -24,11 +26,14 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date data;
     
     @NotBlank
     private String tipo;
+
+    @NotBlank
+    private String descricaoTextual;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "atendimento_id")
@@ -37,10 +42,10 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(Date data, @NotBlank String tipo, Atendimento idatendimento) {
-        this.data = data;
+    public Evento(@NotBlank String tipo, Atendimento idatendimento, String descricaoTextual) {
         this.tipo = tipo;
         this.idatendimento = idatendimento;
+        this.descricaoTextual=descricaoTextual;
     }
 
     @Override

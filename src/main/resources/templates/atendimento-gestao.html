@@ -1,53 +1,48 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
 
-<form th:action="@{/atendimento/admin/}" th:object="${atendimento}">
+<form th:action="@{/atendimento/admin}" th:object="${atendimento}" method="POST">
     <div class="row form-group">
         <div class="col-md-8">
-            <label>Atendente: <select class="form-control" th:field="*{id}">
-                <option th:each="atopcao : ${atopcoes}"
-                        th:field="*{id}"
-                        th:value="${atopcao.id}"
-                        th:text="${atopcao.nomeCompleto}"></option>
-            </select></label>
-            
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </div>
-        <div class="col-md-8">
-            <label>Categoria: <select class="form-control" th:field="*{id}">
-                <option th:each="catopcao : ${catopcoes}"
-                        th:field="*{id}"
-                        th:value="${catsopcao.id}"
-                        th:text="${catopcao.titulo}"></option>
-            </select></label>
-            
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </div>
-        <div class="col-md-8">
-            <label>Usuário: <select class="form-control" th:field="*{id}">
-                <option th:each="usinopcao : ${usinopcoes}"
-                        th:field="*{id}"
-                        th:value="${usinopcao.id}"
-                        th:text="${usinopcao.nomeCompleto}"></option>
-            </select></label>
-            
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </div>
+            <label>Atendente: <select class="form-control" th:field="*{idAtendente}">
+                    <option th:each="atopcao : ${atopcoes}" 
+                            th:field="*{idAtendente}"
+                            th:value="${atopcao.id}"
+                            th:text="${atopcao.nomeCompleto}"
+                            >
+                    </option>
+                </select></label>
 
-        <!-- <div class=" row form-group">
-            <div class="col-md-6">
-                <label>Descrição Textual</label>
-                    <input type="text" name="descriaoTextual" class="form-control" th:field="*{descriaoTextual}" />
-                <strong th:if="${#fields.hasErrors('descriaoTextual')}" th:errors="*{descriaoTextual}"></strong>
-            </div> 
-        </div>  -->
-<!-- 
-        <div class=" row form-group">
-            <div class="col-md-6">
-                <label>Status</label>
-                    <input type="text" name="titulo" class="form-control" th:field="*{titulo}" />
-                <strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong>
-            </div> 
-        </div>  -->
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+        <div class="col-md-8">
+            <label>Categoria: <select class="form-control" th:field="*{idCategoria}">
+                    <option th:each="catopcao : ${catopcoes}"
+                            th:field="*{idCategoria}"
+                            th:value="${catopcao.id}"
+                            th:text="${catopcao.titulo}">
+                    </option>
+                </select></label>
+
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+        <div class="col-md-8">
+            <label>Usuário: <select class="form-control" th:field="*{idUsuario}">
+                    <option th:field="*{idUsuario}" 
+                            th:value="null">Selecione um usuario </option>
+                    <option th:each="usinopcao : ${usinopcoes}"
+                            th:field="*{idUsuario}"
+                            th:value="${usinopcao.id}"
+                            th:text="${usinopcao.nomeCompleto}"></option>
+                </select></label>
+
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+        <div class="col-md-6">
+            <label>Descrição Textual</label>
+            <input type="text" name="descricaoTextual" class="form-control" th:field="${atendimento.descricaoTextual}" />
+            <strong th:if="${#fields.hasErrors('descricaoTextual')}" th:errors="${atendimento.descricaoTextual}"></strong>
+        </div> 
+        
     </div>
     <button type="submit" class="btn btn-info">Salvar</button>
     <button type="reset" class="btn btn-secondary">Limpar</button>

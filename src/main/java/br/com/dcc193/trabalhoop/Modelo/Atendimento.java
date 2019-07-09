@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 /**
  * Atendimento
  */
@@ -32,9 +34,9 @@ public class Atendimento {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = true)
     private Date dataFechamento;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @NotBlank
+    
+    @Column(nullable = true)
+    @CreationTimestamp
     private Date dataCriacao;
 
     @NotBlank
@@ -46,29 +48,14 @@ public class Atendimento {
     @OneToOne(optional = true)
     private Usuario idUsuario;
 
-    @NotBlank
     private String status;
 
-    @NotBlank
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idatendimento", cascade = CascadeType.ALL)
     private List<Evento> idEventos;
 
     public Atendimento() {
     }
-
-    public Atendimento( Categoria idCategoria, Date dataFechamento, @NotBlank Date dataCriacao,
-            @NotBlank String descricaoTextual, Atendente idAtendente, Usuario idUsuario, @NotBlank String status,
-            @NotBlank List<Evento> idEventos) {
-        this.idCategoria = idCategoria;
-        this.dataFechamento = dataFechamento;
-        this.dataCriacao = dataCriacao;
-        this.descricaoTextual = descricaoTextual;
-        this.idAtendente = idAtendente;
-        this.idUsuario = idUsuario;
-        this.status = status;
-        this.idEventos = idEventos;
-    }
-
+    
     public Long getId() {
         return id;
     }
@@ -146,6 +133,17 @@ public class Atendimento {
         return "Atendimento [dataCriacao=" + dataCriacao + ", dataFechamento=" + dataFechamento + ", descricaoTextual="
                 + descricaoTextual + ", id=" + id + ", idAtendente=" + idAtendente + ", idCategoria=" + idCategoria
                 + ", idEventos=" + idEventos + ", idUsuario=" + idUsuario + ", status=" + status + "]";
+    }
+
+    public Atendimento(Categoria idCategoria, Date dataFechamento, @NotBlank String descricaoTextual,
+            Atendente idAtendente, Usuario idUsuario, String status, List<Evento> idEventos) {
+        this.idCategoria = idCategoria;
+        this.dataFechamento = dataFechamento;
+        this.descricaoTextual = descricaoTextual;
+        this.idAtendente = idAtendente;
+        this.idUsuario = idUsuario;
+        this.status = status;
+        this.idEventos = idEventos;
     }
 
 }
