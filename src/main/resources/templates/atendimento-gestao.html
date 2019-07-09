@@ -12,7 +12,6 @@
                     </option>
                 </select></label>
 
-            <button type="submit" class="btn btn-primary">Buscar</button>
         </div>
         <div class="col-md-8">
             <label>Categoria: <select class="form-control" th:field="*{idCategoria}">
@@ -23,7 +22,6 @@
                     </option>
                 </select></label>
 
-            <button type="submit" class="btn btn-primary">Buscar</button>
         </div>
         <div class="col-md-8">
             <label>Usuário: <select class="form-control" th:field="*{idUsuario}">
@@ -35,18 +33,18 @@
                             th:text="${usinopcao.nomeCompleto}"></option>
                 </select></label>
 
-            <button type="submit" class="btn btn-primary">Buscar</button>
         </div>
         <div class="col-md-6">
             <label>Descrição Textual</label>
             <input type="text" name="descricaoTextual" class="form-control" th:field="${atendimento.descricaoTextual}" />
             <strong th:if="${#fields.hasErrors('descricaoTextual')}" th:errors="${atendimento.descricaoTextual}"></strong>
         </div> 
+
         
     </div>
     <button type="submit" class="btn btn-info">Salvar</button>
     <button type="reset" class="btn btn-secondary">Limpar</button>
-    <a th:href="@{/atendimento/planejar.html}" class="btn btn-dark">Cancelar</a> 
+    <a th:href="@{/atendimento/listar.html}" class="btn btn-dark">Cancelar</a> 
 </form>
 
 
