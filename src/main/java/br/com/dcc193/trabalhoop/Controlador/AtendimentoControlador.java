@@ -1,6 +1,6 @@
 package br.com.dcc193.trabalhoop.Controlador;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.dcc193.trabalhoop.Modelo.Atendimento;
 import br.com.dcc193.trabalhoop.Modelo.Evento;
+import br.com.dcc193.trabalhoop.Modelo.Usuario;
 import br.com.dcc193.trabalhoop.Repositorio.AtendenteRepositorio;
 import br.com.dcc193.trabalhoop.Repositorio.AtendimentoRepositorio;
 import br.com.dcc193.trabalhoop.Repositorio.CategoriaRepositorio;
@@ -87,6 +88,14 @@ public class AtendimentoControlador {
         mv.setViewName("atendimento-gestao.html");
         mv.addObject("atendimento",atendimento);
         return mv;
+    }
+    //gambs
+    private List<Integer> atendimentos(){
+        List<Integer> atendimentos;
+        for (Usuario u : atRepositorio.getListUsuariosInAtendimento()) {
+            atendimentos.add(atRepositorio.countAtendimentoByidUsuario(u));                    
+        }
+        return atendimentos;
     }
 
 }

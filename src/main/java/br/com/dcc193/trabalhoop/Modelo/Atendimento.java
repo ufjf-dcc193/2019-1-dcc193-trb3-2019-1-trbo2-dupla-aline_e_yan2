@@ -56,6 +56,16 @@ public class Atendimento {
     public Atendimento() {
     }
     
+    public Atendimento(Categoria idCategoria, @NotBlank String descricaoTextual, Atendente idAtendente,
+            Usuario idUsuario, String status, List<Evento> idEventos) {
+        this.idCategoria = idCategoria;
+        this.descricaoTextual = descricaoTextual;
+        this.idAtendente = idAtendente;
+        this.idUsuario = idUsuario;
+        this.status = status;
+        this.idEventos = idEventos;
+    }
+
     public Long getId() {
         return id;
     }
@@ -127,23 +137,11 @@ public class Atendimento {
     public void setIdEventos(List<Evento> idEventos) {
         this.idEventos = idEventos;
     }
-
     @Override
     public String toString() {
         return "Atendimento [dataCriacao=" + dataCriacao + ", dataFechamento=" + dataFechamento + ", descricaoTextual="
                 + descricaoTextual + ", id=" + id + ", idAtendente=" + idAtendente + ", idCategoria=" + idCategoria
                 + ", idEventos=" + idEventos + ", idUsuario=" + idUsuario + ", status=" + status + "]";
-    }
-
-    public Atendimento(Categoria idCategoria, Date dataFechamento, @NotBlank String descricaoTextual,
-            Atendente idAtendente, Usuario idUsuario, String status, List<Evento> idEventos) {
-        this.idCategoria = idCategoria;
-        this.dataFechamento = dataFechamento;
-        this.descricaoTextual = descricaoTextual;
-        this.idAtendente = idAtendente;
-        this.idUsuario = idUsuario;
-        this.status = status;
-        this.idEventos = idEventos;
     }
 
 }

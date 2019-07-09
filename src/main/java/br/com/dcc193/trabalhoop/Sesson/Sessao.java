@@ -2,11 +2,7 @@ package br.com.dcc193.trabalhoop.Sesson;
 import br.com.dcc193.trabalhoop.Modelo.*;
 import br.com.dcc193.trabalhoop.Repositorio.AtendenteRepositorio;
 
-import java.text.SimpleDateFormat;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Sessao {
