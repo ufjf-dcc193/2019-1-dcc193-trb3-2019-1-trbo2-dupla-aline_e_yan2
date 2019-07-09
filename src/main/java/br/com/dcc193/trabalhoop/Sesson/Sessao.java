@@ -12,18 +12,11 @@ import javax.servlet.http.HttpSession;
 public class Sessao {
     public static final String atendenteLogin = "usuarioLogado";
 
-    public static final String getDataAtualFormatada(){
-        String formato = "dd-MM-YY";
-        java.util.Date agora = new java.util.Date();
-        SimpleDateFormat formatter = new SimpleDateFormat(formato);
-        return formatter.format(agora);
-    }
     public static final Atendente getAtendenteLogado(HttpServletRequest request, AtendenteRepositorio atendenteRep){
         
         HttpSession session = request.getSession(true);
         if (session != null) {
             return (Atendente)session.getAttribute("atendente");
-            // return atendenteRep.getOne((Long)session.getAttribute("idAtendente"));
             
         }
         
