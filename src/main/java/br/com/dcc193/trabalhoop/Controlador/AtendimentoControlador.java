@@ -69,7 +69,7 @@ public class AtendimentoControlador {
         Evento eventoDeAbertura = new Evento("Abertura",
                  atRepositorio.getAtendimentoByAtemdemteAndData(
                      Sessao.getAtendenteLogado(request, atendRepositorio),
-                      atendimento.getDataCriacao()),atendimento.getDescricaoTextual());
+                      atendimento.getDataCriacao()));
         evRepositorio.save(eventoDeAbertura);
         
         mv.setViewName("redirect:/atendimento/admin.html");

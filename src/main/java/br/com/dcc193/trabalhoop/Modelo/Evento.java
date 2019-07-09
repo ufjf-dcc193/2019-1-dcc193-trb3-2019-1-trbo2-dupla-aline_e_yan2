@@ -32,9 +32,6 @@ public class Evento {
     @NotBlank
     private String tipo;
 
-    @NotBlank
-    private String descricaoTextual;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "atendimento_id")
     private Atendimento idatendimento;
@@ -42,10 +39,9 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(@NotBlank String tipo, Atendimento idatendimento, String descricaoTextual) {
+    public Evento(@NotBlank String tipo, Atendimento idatendimento ) {
         this.tipo = tipo;
         this.idatendimento = idatendimento;
-        this.descricaoTextual=descricaoTextual;
     }
 
     @Override
