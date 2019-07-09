@@ -29,8 +29,8 @@ public interface AtendimentoRepositorio extends JpaRepository<Atendimento,Long>{
     List<Atendimento> getAtendimentoByAtemdemteAndStatus(@Param("atendente") Atendente iAtendente,
      @Param("status") String status);
     
-    @Query("SELECT a.idUsuario FROM Atendimento")
+    /*@Query("SELECT a.idUsuario FROM Atendimento")
     List<Usuario> getListUsuariosInAtendimento();
     int countAtendimentoByidUsuario(Usuario idUsuario);
-    
+    */
 }

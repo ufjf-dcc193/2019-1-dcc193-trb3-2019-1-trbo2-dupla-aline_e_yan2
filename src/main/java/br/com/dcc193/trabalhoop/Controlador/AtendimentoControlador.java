@@ -74,7 +74,7 @@ public class AtendimentoControlador {
                       atendimento.getDataCriacao()));
         evRepositorio.save(eventoDeAbertura);
         
-        mv.setViewName("redirect:/atendimento/admin.html");
+        mv.setViewName("redirect:/atendimento/");
         return mv;
     }
 
@@ -90,15 +90,26 @@ public class AtendimentoControlador {
         mv.addObject("atendimento",atendimento);
         return mv;
     }
+
+    @GetMapping("/listar.html")
+    public ModelAndView listar() {
+        List<Atendimento> atendimentos = atRepositorio.findAll();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("atendimento-listar.html");
+        mv.addObject("atendimentos", atendimentos);
+        return mv;
+ 
+    }
+ 
     //
     //pegando o cont de atendimentos por usuarios 
     //
-    private List<Integer> atendimentos(){
+   /* private List<Integer> atendimentos(){
         List<Integer> atendimentos = new ArrayList<>();
         for (Usuario u : atRepositorio.getListUsuariosInAtendimento()) {
             atendimentos.add(atRepositorio.countAtendimentoByidUsuario(u));                    
         }
         return atendimentos;
-    }
+    }*/
 
 }

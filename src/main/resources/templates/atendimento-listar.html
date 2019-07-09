@@ -2,7 +2,7 @@
 
 <div class="panel panel-default" style="margin: 10px">
     <div class="panel-heading">
-        <h5 class="panel-title">Lista de Atendentes</h5>
+        <h5 class="panel-title">Lista de Atendimentos</h5>
     </div>
     <div class="panel-body">
         <table class="table" style = "max-width:80%;">
@@ -20,12 +20,17 @@
             <tbody>
                 <tr th:each="atendimento:${atendimentos}" th:object=${atendimento}>
                     <td th:text=*{id}></td>
-                    <!-- <td th:text=*{catopcao.titulo}></td> -->
-                    <td th:text=*{dataFechamento}></td>
+                    <td th:text=*{idCategoria.getTitulo()}></td>
                     <td th:text=*{dataCriacao}></td>
+                    <td th:text=*{dataFechamento}></td>
                     <td th:text=*{descricaoTextual}></td>
-                    <!-- <td th:text=*{usinopcao.nomeCompleto}></td>
-                    <td th:text=*{atenopcao.nomeCompleto}></td> -->
+                    <div th:if=*{idUsuario==null}>
+                        <td>Usuario não informado</td>
+                    </div>
+                    <div th:unless=*{idUsuario==null}>
+                        <td th:text=*{idUsuario.getNomeCompleto()}></td>
+                    </div>
+                    <td th:text=*{idAtendente.getNomeCompleto()}></td>
                     <td><a th:href="@{/atendimento/editar.html(id=${atendimento.id})}">
                         <button>Atualizar</button></a></td>
                    
