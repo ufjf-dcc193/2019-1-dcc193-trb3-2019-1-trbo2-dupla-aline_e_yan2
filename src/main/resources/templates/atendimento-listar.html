@@ -33,13 +33,15 @@
                     <td th:text=*{idAtendente.getNomeCompleto()}></td>
                     <td><a th:href="@{/atendimento/editar.html(id=${atendimento.id})}">
                         <button>Atualizar</button></a></td>
-                   
+                        <td><a th:href="@{/evento/listar.html(id=${atendimento.id})}">
+                            <button>Eventos</button></a></td>
                 </tr>
             </tbody>
         </table>
         <div>
     </div>
     </div>
+    <a th:href="@{/atendimento/admin.html}" class="btn btn-dark">Criar Categoria</a> 
 </div>
 
 <div th:replace="fragments/rodape :: rodape"></div>
