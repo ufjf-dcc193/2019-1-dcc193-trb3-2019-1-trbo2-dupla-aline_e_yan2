@@ -3,7 +3,7 @@
 <form th:action="@{/atendimento/admin}" th:object="${atendimento}" method="POST">
     <div class="row form-group">
         <div class="col-md-8">
-            <label>Atendente: <select class="form-control" th:field="*{idAtendente}">
+            <label>Atendente: <select  style="width:300px" class="form-control" th:field="*{idAtendente}">
                     <option th:each="atopcao : ${atopcoes}" 
                             th:field="*{idAtendente}"
                             th:value="${atopcao.id}"
@@ -14,7 +14,7 @@
 
         </div>
         <div class="col-md-8">
-            <label>Categoria: <select class="form-control" th:field="*{idCategoria}">
+            <label>Categoria: <select style="width:300px" class="form-control" th:field="*{idCategoria}">
                     <option th:each="catopcao : ${catopcoes}"
                             th:field="*{idCategoria}"
                             th:value="${catopcao.id}"
@@ -24,7 +24,7 @@
 
         </div>
         <div class="col-md-8">
-            <label>Usuário: <select class="form-control" th:field="*{idUsuario}">
+            <label>Usuário: <select style="width:300px" class="form-control" th:field="*{idUsuario}">
                     <option th:field="*{idUsuario}" 
                             th:value="null">Selecione um usuario </option>
                     <option th:each="usinopcao : ${usinopcoes}"
