@@ -198,25 +198,14 @@ public class AtendimentoControlador {
     @GetMapping("/listar-atendimento-categoria{id}")
     public ModelAndView listarAtendimentoCategoria(@RequestParam Long id) {
         Categoria categoria = catRepositorio.findById(id).get();
-       // List<Atendimento> atendimentos = atRepositorio.findByIdCategoria(categoria);
-       List<Atendimento> atendimentos = atRepositorio
+        List<Atendimento> atendimentos = atRepositorio
                     .getTodosAtendimentoDeStatusDiferenteDe(categoria); 
-       ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         mv.setViewName("lista-atendimento-categoria.html");
         mv.addObject("atendimentos", atendimentos);
         return mv;
     }
-
-
-    //
-    //pegando o cont de atendimentos por usuarios 
-    //
-   /* private List<Integer> atendimentos(){
-        List<Integer> atendimentos = new ArrayList<>();
-        for (Usuario u : atRepositorio.getListUsuariosInAtendimento()) {
-            atendimentos.add(atRepositorio.countAtendimentoByidUsuario(u));                    
-        }
-        return atendimentos;
-    }*/
+    
+    
 
 }

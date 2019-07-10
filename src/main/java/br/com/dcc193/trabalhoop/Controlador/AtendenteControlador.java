@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.dcc193.trabalhoop.Modelo.Atendente;
+import br.com.dcc193.trabalhoop.Modelo.Atendimento;
 import br.com.dcc193.trabalhoop.Repositorio.AtendenteRepositorio;
+import br.com.dcc193.trabalhoop.Repositorio.AtendimentoRepositorio;
 
 
 
@@ -30,7 +32,9 @@ public class AtendenteControlador {
 
     @Autowired
     private AtendenteRepositorio repositorio;
-
+    @Autowired
+    private AtendimentoRepositorio atRepositorio;
+    
     @RequestMapping({ "", "/", "/index.html" })
     public ModelAndView atividadeIndex() {
         ModelAndView mv = new ModelAndView();
@@ -100,5 +104,14 @@ public class AtendenteControlador {
         mv.setViewName("redirect:/atendente/listar.html");
         return mv;
     }
-    
+    @GetMapping("/total-atendimento{id}")
+    public ModelAndView contarAtendimentoAtendente(@RequestParam Long id) {
+        ModelAndView mv = new ModelAndView();
+        Atendente atendente= repositorio.findById(id).get();
+        List<Atendimento> atendimentos = atRepositorio
+           .getTodosAtendimentosDiferentesDeFechado(atendente);
+        mv.addObject("contagem", (Integer)atendimentos.size()); 
+        mv.setViewName("atendimento-contagem-atendente.html");        
+        return mv;
+    }
 }
