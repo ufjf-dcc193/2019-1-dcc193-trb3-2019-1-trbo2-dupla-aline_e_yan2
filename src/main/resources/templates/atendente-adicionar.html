@@ -12,7 +12,7 @@
     <div class=" row form-group">
             <div class="col-md-6">
                 <label>Codigo para seu Acesso</label>
-                <input type="text" name="codigoAcesso" class="form-control" th:field="*{codigoAcesso}"/>
+                <input type="text" name="codigoAcesso" readonly=“true” class="form-control" th:field="*{codigoAcesso}"/>
                 <strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong>
             </div>
     </div>

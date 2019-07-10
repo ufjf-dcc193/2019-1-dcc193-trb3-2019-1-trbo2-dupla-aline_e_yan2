@@ -19,7 +19,7 @@
     <div class=" row form-group">
             <div class="col-md-6">
                     <label>Codigo Vínculo</label>
-                    <input type="text" name="codigoVinculo" class="form-control" th:field="*{codigoVinculo}"/>
+                    <input type="text" readonly=“true” name="codigoVinculo" class="form-control" th:field="*{codigoVinculo}"/>
                     <strong th:if="${#fields.hasErrors('codigoVinculo')}" th:errors="*{codigoVinculo}"></strong>
             </div>
     </div>
