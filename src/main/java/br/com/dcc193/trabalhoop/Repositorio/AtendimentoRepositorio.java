@@ -31,4 +31,7 @@ public interface AtendimentoRepositorio extends JpaRepository<Atendimento,Long>{
      @Param("status") String status);
      
     List<Atendimento> findByIdCategoria(Categoria idCategoria);
+    
+    @Query("SELECT a FROM Atendimento a WHERE a.idCategoria=:categoria and a.status!= 'Fechado'")
+    List<Atendimento> getTodosAtendimentoDeStatusDiferenteDe(@Param("categoria") Categoria idCategoria);
 }
