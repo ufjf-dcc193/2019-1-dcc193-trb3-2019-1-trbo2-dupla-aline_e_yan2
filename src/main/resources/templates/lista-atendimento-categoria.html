@@ -1,0 +1,42 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+
+<div class="panel panel-default" style="margin: 10px">
+    <div class="panel-heading">
+        <h5 class="panel-title">Lista de Atendimentos</h5>
+    </div>
+    <div class="panel-body">
+        <table class="table" style = "max-width:80%;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Categoria</th>
+                    <th>Data/Hora Criação</th>
+                    <th>Data/Hora Fechamento</th>
+                    <th>Descrição Textual</th>
+                    <th>Usuario</th>
+                    <th>Atendente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="atendimento:${atendimentos}" th:object=${atendimento}>
+                    <td th:text=*{id}></td>
+                    <td th:text=*{idCategoria.getTitulo()}></td>
+                    <td th:text=*{dataCriacao}></td>
+                    <td th:text=*{dataFechamento}></td>
+                    <td th:text=*{descricaoTextual}></td>
+                    <div th:if=*{idUsuario==null}>
+                        <td>Usuario não informado</td>
+                    </div>
+                    <div th:unless=*{idUsuario==null}>
+                        <td th:text=*{idUsuario.getNomeCompleto()}></td>
+                    </div>
+                    <td th:text=*{idAtendente.getNomeCompleto()}></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+    </div>
+    </div>
+    <a th:href="@{/categoria/listar.html}" class="btn btn-dark">Listar Categoria</a> 
+</div>            
+<div th:replace="fragments/rodape :: rodape"></div>

@@ -1,0 +1,13 @@
+<div th:replace="fragments/cabecalho :: cabecalho"></div>
+<form th:action="@{/atendimento/atendente-atendimento{id}(id=*{id})}" th:object="${atendimento}" method="POST">    <div class=" row form-group"></div>
+    <h1>Total de Atendimento não fechado por Atendente </h1>
+    <tbody>
+        <tr th:each="atendente:${atendente}" th:object=${atendente}>
+            <td th:text=*{contagem}></td>
+        </tr>
+    </tbody>
+    </table>
+    </form>
+    <a th:href="@{/usuario/listar.html}">
+        <button>Listar Usuários</button></a>
+<div th:replace="fragments/rodape :: rodape"></div>
