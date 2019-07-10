@@ -95,8 +95,8 @@ public class AtendimentoControlador {
 
     @GetMapping("/listar.html")
     public ModelAndView listar() {
-        List<Atendimento> atendimentos = atRepositorio.findAll();
         ModelAndView mv = new ModelAndView();
+        List<Atendimento> atendimentos = atRepositorio.findAll();
         mv.setViewName("atendimento-listar.html");
         mv.addObject("atendimentos", atendimentos);
         return mv;
@@ -123,18 +123,51 @@ public class AtendimentoControlador {
             mv.addObject("atendimento", atendimento);
             return mv;
         }
-        //
-        // falta concatenar a nova descrição e marcar o q trocou
-        //
+        Atendimento atendimentoVelho = atRepositorio.findById(id).get();
+        atendimento.setDescricaoTextual(
+            concatenaDescricao(atendimentoVelho,
+                    atendimento, novaDescricaoTextual));
         atRepositorio.save(atendimento);
-        mv.setViewName("redirect:/usuario/listar.html");
+        List<Atendimento> atendimentos = atRepositorio.findAll();
+        mv.setViewName("atendimento-listar.html");
+        mv.addObject("atendimentos", atendimentos);
         return mv;
     }
-    private String formatarDescricao(Atendimento a){
+    
+    private String concatenaDescricao(Atendimento a, @Valid Atendimento atendimento, String novaDescricao) {
+        String format = a.getDescricaoTextual();
+        if(!a.getStatus().equals(atendimento.getStatus())){
+            format += "Status do atendimento: "
+            +a.getStatus()+"para ->"+atendimento.getStatus()+"\n";
+        }else{
+            format = "Status do atendimento: "+atendimento.getStatus()+"\n";
+        }
+        if(!a.getIdAtendente().equals(atendimento.getIdAtendente())){
+            format+="Atendente: "
+            +a.getIdAtendente().getNomeCompleto()+"para ->"
+            +atendimento.getIdAtendente().getNomeCompleto()+"\n";
+        }else{
+            format+="Atendente: "+atendimento.getIdAtendente().getNomeCompleto()+"\n";
+        }
+        if(!a.getIdUsuario().equals(atendimento.getIdUsuario())){
+            format+="Atendente: "
+            +a.getIdUsuario().getNomeCompleto()+"para ->"
+            +atendimento.getIdUsuario().getNomeCompleto()+"\n";
+        }else{
+            format+="Usuario: "+atendimento.getIdUsuario().getNomeCompleto()+"\n";
+        }
+        format+="Descrição do atendimento: "+novaDescricao+"\n";
+        format+="-------------------------"+"\n";
+        return format;
+    }
+
+    private String formatarDescricao(Atendimento a) {
         String format = "Status do atendimento: "+a.getStatus()+"\n";
         format+="Atendente: "+a.getIdAtendente().getNomeCompleto()+"\n";
         if(a.getIdUsuario()!= null)
             format+="Usuario: "+a.getIdUsuario().getNomeCompleto()+"\n";
+        else
+            format+="Usuario: Não informado \n";
         format+="Descrição do atendimento: "+a.getDescricaoTextual()+"\n";
         format+="-------------------------"+"\n";        
         return format;
