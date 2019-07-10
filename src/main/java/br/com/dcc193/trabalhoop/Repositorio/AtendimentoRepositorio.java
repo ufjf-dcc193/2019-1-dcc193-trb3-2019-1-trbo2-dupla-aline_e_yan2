@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.dcc193.trabalhoop.Modelo.Atendente;
 import br.com.dcc193.trabalhoop.Modelo.Atendimento;
+import br.com.dcc193.trabalhoop.Modelo.Categoria;
 import br.com.dcc193.trabalhoop.Modelo.Usuario;
 
 
@@ -28,9 +29,6 @@ public interface AtendimentoRepositorio extends JpaRepository<Atendimento,Long>{
     @Query("SELECT a FROM Atendimento a WHERE a.idAtendente =:atendente and a.status !=:status")
     List<Atendimento> getAtendimentoByAtemdemteAndStatus(@Param("atendente") Atendente iAtendente,
      @Param("status") String status);
-    
-    /*@Query("SELECT a.idUsuario FROM Atendimento")
-    List<Usuario> getListUsuariosInAtendimento();
-    int countAtendimentoByidUsuario(Usuario idUsuario);
-    */
+     
+    List<Atendimento> findByIdCategoria(Categoria idCategoria);
 }

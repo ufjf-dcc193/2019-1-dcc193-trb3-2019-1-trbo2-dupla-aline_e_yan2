@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.dcc193.trabalhoop.Modelo.Atendente;
 import br.com.dcc193.trabalhoop.Modelo.Atendimento;
+import br.com.dcc193.trabalhoop.Modelo.Categoria;
 import br.com.dcc193.trabalhoop.Modelo.Evento;
 import br.com.dcc193.trabalhoop.Modelo.Usuario;
 import br.com.dcc193.trabalhoop.Repositorio.AtendenteRepositorio;
@@ -192,6 +193,16 @@ public class AtendimentoControlador {
             evRepositorio.save(evento);
         }
     }
+    @GetMapping("/listar-atendimento-categoria{id}")
+    public ModelAndView listarAtendimentoCategoria(@RequestParam Long id) {
+        Categoria categoria = catRepositorio.findById(id).get();
+        List<Atendimento> atendimentos = atRepositorio.findByIdCategoria(categoria);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("lista-atendimento-categoria.html");
+        mv.addObject("atendimentos", atendimentos);
+        return mv;
+    }
+
 
     //
     //pegando o cont de atendimentos por usuarios 
