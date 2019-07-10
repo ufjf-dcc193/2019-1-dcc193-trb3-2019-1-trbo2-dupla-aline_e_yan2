@@ -3,46 +3,70 @@
         <div class="row form-group">
                 <div class="col-md-8">
                         <label>Descrição geral do atendimento</label>
-                        <textarea rows="10" cols="40" maxlength="500" readonly th:field="*{descricaoTextual}" th:text="*{descricaoTextual}"></textarea>
-
+                        <div>
+                                <textarea rows="10" cols="40" maxlength="500" readonly th:field="*{descricaoTextual}" th:text="*{descricaoTextual}"></textarea>
+                        </div>
                 </div>
                 <div class="col-md-8">
                         <label>Atendente: <select class="form-control" th:field="*{idAtendente}">
-                                        <option th:each="atopcao : ${atopcoes}" th:field="*{idAtendente}"
-                                                th:value="${atopcao.id}" th:text="${atopcao.nomeCompleto}">
+                                        <option th:each="atopcao : ${atopcoes}"
+                                        th:field="*{idAtendente}"
+                                        th:value="${atopcao.id}"
+                                        th:text="${atopcao.nomeCompleto}"
+                                        th:selected="*{idAtendente.getId()}">
                                         </option>
                                 </select></label>
 
                 </div>
                 <div class="col-md-8">
                         <label>Categoria: <select class="form-control" th:field="*{idCategoria}">
-                                        <option th:each="catopcao : ${catopcoes}" th:field="*{idCategoria}"
-                                                th:value="${catopcao.id}" th:text="${catopcao.titulo}">
+                                        <option th:each="catopcao : ${catopcoes}"
+                                        th:field="*{idCategoria}"
+                                        th:value="${catopcao.id}"
+                                        th:text="${catopcao.titulo}"
+                                        th:selected="*{idCategoria.getId()}">
                                         </option>
                                 </select></label>
 
                 </div>
                 <div class="col-md-8">
-                        <label>Usuário: <select class="form-control" th:field="*{idUsuario}">
-                                        <option th:field="*{idUsuario}" th:value="null">Selecione um usuario </option>
-                                        <option th:each="usinopcao : ${usinopcoes}" th:field="*{idUsuario}"
-                                                th:value="${usinopcao.id}" th:text="${usinopcao.nomeCompleto}"></option>
-                                </select></label>
-
+                        <label>Usuário:
+                                <select class="form-control" th:field="*{idUsuario}">
+                                        <div th:if=*{idUsuario==null}>
+                                                <option th:field="*{idUsuario}" th:value="null">Selecione um usuario </option>
+                                                <option th:each="usinopcao : ${usinopcoes}" 
+                                                th:field="*{idUsuario}"
+                                                th:value="${usinopcao.id}"
+                                                th:text="${usinopcao.nomeCompleto}"></option>
+                                        </div>
+                                        <div th:unless=*{idUsuario==null}>
+                                                <option th:field="*{idUsuario}" th:value="null">Selecione um usuario </option>
+                                                <option th:each="usinopcao : ${usinopcoes}" 
+                                                th:field="*{idUsuario}"
+                                                th:value="${usinopcao.id}"
+                                                th:text="${usinopcao.nomeCompleto}"
+                                                th:selected="*{idUsuario.getId()}"></option>
+                                        </div>
+                                </select>
+                        </label>                
                 </div>
                 <div class="col-md-6">
-                        <label>Descrição Textual</label>
+                        <label>Acrescentar Descrição Textual</label>
                         <input type="text" name="descricaoTextual" class="form-control"
-                                th:field="${atendimento.descricaoTextual}" />
-                        <strong th:if="${#fields.hasErrors('descricaoTextual')}" th:errors="${atendimento.descricaoTextual}"></strong>
+                                th:field="${novaDescricaoTextual}" th:text="${novaDescricaoTextual}"/>
                 </div> 
                 <div class="col-md-8">
                         <label>Usuário: <select class="form-control" th:field="*{status}">
-                                <option th:field="*{status}">Revisão</option> 
-                                <option th:field="*{status}">Aberto</option>
-                                <option th:field="*{status}">Bloqueado</option> 
-                                <option th:field="*{status}">Em Andamento</option>
-                                <option th:field="*{status}">Fechado</option> 
+                                <option th:field="*{status}" 
+                                th:value="Revisão">Revisão</option> 
+                                <option th:field="*{status}"
+                                th:value="Aberto">Aberto</option>
+                                <option th:field="*{status}"
+                                th:value="Bloqueado">Bloqueado</option> 
+                                <option th:field="*{status}"
+                                th:value="EmAndamento">Em Andamento</option>
+                                <option th:field="*{status}"
+                                th:value="Fechado">Fechado</option> 
                             </select></label>
                 
                 </div>

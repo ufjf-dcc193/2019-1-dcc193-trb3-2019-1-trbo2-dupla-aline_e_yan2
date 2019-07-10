@@ -1,6 +1,5 @@
 package br.com.dcc193.trabalhoop.Controlador;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.dcc193.trabalhoop.Modelo.Atendimento;
@@ -67,6 +68,7 @@ public class AtendimentoControlador {
             return mv;
         }
         atendimento.setStatus("Revisao");
+        atendimento.setDescricaoTextual(formatarDescricao(atendimento));
         atRepositorio.save(atendimento);
         Evento eventoDeAbertura = new Evento("Abertura",
                  atRepositorio.getAtendimentoByAtemdemteAndData(
@@ -100,7 +102,43 @@ public class AtendimentoControlador {
         return mv;
  
     }
- 
+    @GetMapping(value = { "/editar{id}" })
+    public ModelAndView editar(@RequestParam Long id) {
+        ModelAndView mv = new ModelAndView();
+        Atendimento atendimento = atRepositorio.getOne(id);
+        mv.addObject("atopcoes",atendRepositorio.findAll());
+        mv.addObject("catopcoes",catRepositorio.findAll());
+        mv.addObject("usinopcoes",usinRepositorio.findAll());
+        mv.addObject("novaDescricaoTextual", "Acrescente mais itens na descrição");
+        mv.addObject("atendimento",atendimento);
+        mv.setViewName("atendimento-editar.html");
+        return mv;
+    }
+    @PostMapping("/editar{id}")
+    public ModelAndView editar(@PathVariable Long id, @Valid Atendimento atendimento,
+    BindingResult binding, String novaDescricaoTextual) {
+        ModelAndView mv = new ModelAndView();
+        if (binding.hasErrors()) {
+            mv.setViewName("usuario-form-edit.html");
+            mv.addObject("atendimento", atendimento);
+            return mv;
+        }
+        //
+        // falta concatenar a nova descrição e marcar o q trocou
+        //
+        atRepositorio.save(atendimento);
+        mv.setViewName("redirect:/usuario/listar.html");
+        return mv;
+    }
+    private String formatarDescricao(Atendimento a){
+        String format = "Status do atendimento: "+a.getStatus()+"\n";
+        format+="Atendente: "+a.getIdAtendente().getNomeCompleto()+"\n";
+        if(a.getIdUsuario()!= null)
+            format+="Usuario: "+a.getIdUsuario().getNomeCompleto()+"\n";
+        format+="Descrição do atendimento: "+a.getDescricaoTextual()+"\n";
+        format+="-------------------------"+"\n";        
+        return format;
+    }
     //
     //pegando o cont de atendimentos por usuarios 
     //
