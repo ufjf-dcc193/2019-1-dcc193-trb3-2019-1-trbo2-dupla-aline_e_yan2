@@ -123,7 +123,7 @@ public class AtendimentoControlador {
     }
     @PostMapping("/editar{id}")
     public ModelAndView editar(@PathVariable Long id, @Valid Atendimento atendimento,
-    BindingResult binding, @String novaDescricaoTextual, HttpServletRequest request) {
+    BindingResult binding, String novaDescricaoTextual, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         if (binding.hasErrors()) {
             mv.setViewName("usuario-form-edit.html");
