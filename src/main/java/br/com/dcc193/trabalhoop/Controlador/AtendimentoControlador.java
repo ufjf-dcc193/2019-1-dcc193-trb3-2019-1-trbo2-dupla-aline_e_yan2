@@ -77,7 +77,7 @@ public class AtendimentoControlador {
         eventoDeAbertura.setDescricaoTextual("Abertura do Evento.");
         evRepositorio.save(eventoDeAbertura);
         
-        mv.setViewName("redirect:/atendimento/");
+        mv.setViewName("redirect:/atendimento/listar.html");
         return mv;
     }
 
