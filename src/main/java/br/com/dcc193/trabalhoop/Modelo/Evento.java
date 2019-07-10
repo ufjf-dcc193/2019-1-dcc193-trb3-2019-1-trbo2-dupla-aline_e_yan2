@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
@@ -28,10 +29,14 @@ public class Evento {
     private Date data;
     
     @NotBlank
+    @Lob
+    private String descricaoTextual;
+
+
+    @NotBlank
     private String tipo;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "atendimento_id")
+    @ManyToOne
     private Atendimento idatendimento;
 
     public Evento() {
@@ -76,6 +81,15 @@ public class Evento {
     
     @Override
     public String toString() {
-        return "Evento [data=" + data + ", id=" + id + ", idatendimento=" + idatendimento + ", tipo=" + tipo + "]";
+        return  descricaoTextual+"Data do evento: "
+        + data+"\n"+"----------------------------\n" ;
+    }
+
+    public String getDescricaoTextual() {
+        return descricaoTextual;
+    }
+
+    public void setDescricaoTextual(String descricaoTextual) {
+        this.descricaoTextual = descricaoTextual;
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.dcc193.trabalhoop.Modelo.Atendente;
 import br.com.dcc193.trabalhoop.Modelo.Atendimento;
 import br.com.dcc193.trabalhoop.Modelo.Evento;
 import br.com.dcc193.trabalhoop.Modelo.Usuario;
@@ -68,12 +69,12 @@ public class AtendimentoControlador {
             return mv;
         }
         atendimento.setStatus("Revisao");
-        atendimento.setDescricaoTextual(formatarDescricao(atendimento));
         atRepositorio.save(atendimento);
         Evento eventoDeAbertura = new Evento("Abertura",
                  atRepositorio.getAtendimentoByAtemdemteAndData(
                      Sessao.getAtendenteLogado(request, atendRepositorio),
                       atendimento.getDataCriacao()));
+        eventoDeAbertura.setDescricaoTextual("Abertura do Evento.");
         evRepositorio.save(eventoDeAbertura);
         
         mv.setViewName("redirect:/atendimento/");
@@ -105,18 +106,24 @@ public class AtendimentoControlador {
     @GetMapping(value = { "/editar{id}" })
     public ModelAndView editar(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
-        Atendimento atendimento = atRepositorio.getOne(id);
+        Atendimento atendimento = atRepositorio.findById(id).get();
+        
+        String eventos="";
+        for (Evento evento : evRepositorio.findByIdatendimento(atendimento)) {
+            eventos+= evento.toString();
+        }
         mv.addObject("atopcoes",atendRepositorio.findAll());
         mv.addObject("catopcoes",catRepositorio.findAll());
         mv.addObject("usinopcoes",usinRepositorio.findAll());
-        mv.addObject("novaDescricaoTextual", "Acrescente mais itens na descrição");
+        mv.addObject("eventos", eventos);
+        mv.addObject("novaDescricaoTextual", "Descreva o que esta fazendo");
         mv.addObject("atendimento",atendimento);
         mv.setViewName("atendimento-editar.html");
         return mv;
     }
     @PostMapping("/editar{id}")
     public ModelAndView editar(@PathVariable Long id, @Valid Atendimento atendimento,
-    BindingResult binding, String novaDescricaoTextual) {
+    BindingResult binding, @String novaDescricaoTextual, HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         if (binding.hasErrors()) {
             mv.setViewName("usuario-form-edit.html");
@@ -124,9 +131,8 @@ public class AtendimentoControlador {
             return mv;
         }
         Atendimento atendimentoVelho = atRepositorio.findById(id).get();
-        atendimento.setDescricaoTextual(
-            concatenaDescricao(atendimentoVelho,
-                    atendimento, novaDescricaoTextual));
+        atendimento.setDataCriacao(atendimentoVelho.getDataCriacao());
+        concatenaDescricao(atendimentoVelho, atendimento, novaDescricaoTextual, request);
         atRepositorio.save(atendimento);
         List<Atendimento> atendimentos = atRepositorio.findAll();
         mv.setViewName("atendimento-listar.html");
@@ -134,44 +140,59 @@ public class AtendimentoControlador {
         return mv;
     }
     
-    private String concatenaDescricao(Atendimento a, @Valid Atendimento atendimento, String novaDescricao) {
-        String format = a.getDescricaoTextual();
+    private void concatenaDescricao(Atendimento a, Atendimento atendimento, 
+    String novaDescricao, HttpServletRequest request) {
+        Atendente atendente =Sessao.getAtendenteLogado(request, atendRepositorio); 
+        String format, alteracao, descricaoDoAtendimento;
+        descricaoDoAtendimento = "Descrição do atendimento: "+novaDescricao+"\n";
+        format = "Autor: "+atendente.getNomeCompleto()+"\n";
+        format +="A seguinte alteração foi realizada.\n";
         if(!a.getStatus().equals(atendimento.getStatus())){
-            format += "Status do atendimento: "
-            +a.getStatus()+"para ->"+atendimento.getStatus()+"\n";
-        }else{
-            format = "Status do atendimento: "+atendimento.getStatus()+"\n";
-        }
-        if(!a.getIdAtendente().equals(atendimento.getIdAtendente())){
-            format+="Atendente: "
-            +a.getIdAtendente().getNomeCompleto()+"para ->"
+            alteracao = "Alteração de status";
+            Evento evento = new Evento(alteracao, atendimento);
+            alteracao+=": "+a.getStatus()+"para --->"+atendimento.getStatus()+"\n";
+            evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
+            evRepositorio.save(evento);
+        }if(!a.getIdAtendente().equals(atendimento.getIdAtendente())){
+            alteracao ="Alteração de atendente";
+            Evento evento = new Evento(alteracao, atendimento);
+            alteracao+=": "+a.getIdAtendente().getNomeCompleto()+"para ->"
             +atendimento.getIdAtendente().getNomeCompleto()+"\n";
-        }else{
-            format+="Atendente: "+atendimento.getIdAtendente().getNomeCompleto()+"\n";
-        }
-        if(!a.getIdUsuario().equals(atendimento.getIdUsuario())){
-            format+="Atendente: "
-            +a.getIdUsuario().getNomeCompleto()+"para ->"
+            evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
+            evRepositorio.save(evento);
+        }if(a.getIdUsuario()==null && atendimento.getIdUsuario()!= null){
+            alteracao="Alteração de usuario";
+            Evento evento = new Evento(alteracao, atendimento);
+            alteracao+=":Não indentificado para ->"
             +atendimento.getIdUsuario().getNomeCompleto()+"\n";
+            evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
+            evRepositorio.save(evento);
+        }else if(a.getIdUsuario()!=null && atendimento.getIdUsuario()== null){
+            alteracao="Alteração de usuario";
+            Evento evento = new Evento(alteracao, atendimento);
+            alteracao+=":"+a.getIdUsuario().getNomeCompleto()
+            +" para -> Não indentificado \n";
+            evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
+            evRepositorio.save(evento);
         }else{
-            format+="Usuario: "+atendimento.getIdUsuario().getNomeCompleto()+"\n";
+            alteracao="Alteração de usuario";
+            Evento evento = new Evento(alteracao, atendimento);
+            alteracao+=": "+a.getIdUsuario().getNomeCompleto()+"para ->"
+            +atendimento.getIdUsuario().getNomeCompleto()+"\n";
+            evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
+            evRepositorio.save(evento);
+
         }
-        format+="Descrição do atendimento: "+novaDescricao+"\n";
-        format+="-------------------------"+"\n";
-        return format;
+        if(!a.getIdCategoria().equals(atendimento.getIdCategoria())){
+            alteracao="Alteração de categoria";
+            Evento evento = new Evento(alteracao, atendimento);
+            alteracao+=": "+a.getIdCategoria().getTitulo()+"para ->"
+            +atendimento.getIdCategoria().getTitulo()+"\n";
+            evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
+            evRepositorio.save(evento);
+        }
     }
 
-    private String formatarDescricao(Atendimento a) {
-        String format = "Status do atendimento: "+a.getStatus()+"\n";
-        format+="Atendente: "+a.getIdAtendente().getNomeCompleto()+"\n";
-        if(a.getIdUsuario()!= null)
-            format+="Usuario: "+a.getIdUsuario().getNomeCompleto()+"\n";
-        else
-            format+="Usuario: Não informado \n";
-        format+="Descrição do atendimento: "+a.getDescricaoTextual()+"\n";
-        format+="-------------------------"+"\n";        
-        return format;
-    }
     //
     //pegando o cont de atendimentos por usuarios 
     //

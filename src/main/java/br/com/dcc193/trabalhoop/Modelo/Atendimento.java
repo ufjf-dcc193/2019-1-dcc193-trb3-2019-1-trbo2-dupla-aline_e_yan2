@@ -52,7 +52,7 @@ public class Atendimento {
 
     private String status;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idatendimento", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Evento> idEventos;
 
     public Atendimento() {

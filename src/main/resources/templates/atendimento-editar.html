@@ -3,8 +3,12 @@
         <div class="row form-group">
                 <div class="col-md-8">
                         <label>Descrição geral do atendimento</label>
+                        <input type="text" name="descricaoTextual"
+                         th:field="*{descricaoTextual}"
+                         th:text="*{descricaoTextual}" readonly></input>
                         <div>
-                                <textarea rows="10" cols="40" maxlength="500" readonly th:field="*{descricaoTextual}" th:text="*{descricaoTextual}"></textarea>
+                                <textarea rows="10" cols="40" maxlength="500" readonly th:text="${eventos}">
+                                </textarea>        
                         </div>
                 </div>
                 <div class="col-md-8">
@@ -52,13 +56,10 @@
                 </div>
                 <div class="col-md-6">
                         <label>Acrescentar Descrição Textual</label>
-                        <input type="text" name="novaDescricaoTextual" class="form-control"
-                                th:field="${novaDescricaoTextual}" th:text="${novaDescricaoTextual}"/>
+                        <input type="text" name="novaDescricaoTextual" class="form-control"/>
                 </div> 
                 <div class="col-md-8">
                         <label>Usuário: <select class="form-control" th:field="*{status}">
-                                <option th:field="*{status}" 
-                                th:value="Revisão">Revisão</option> 
                                 <option th:field="*{status}"
                                 th:value="Aberto">Aberto</option>
                                 <option th:field="*{status}"
