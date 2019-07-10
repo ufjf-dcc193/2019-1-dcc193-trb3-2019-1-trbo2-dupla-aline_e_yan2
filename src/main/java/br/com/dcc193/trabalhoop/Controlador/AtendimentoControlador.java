@@ -175,14 +175,16 @@ public class AtendimentoControlador {
             +" para -> Não indentificado \n";
             evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
             evRepositorio.save(evento);
-        }else{
-            alteracao="Alteração de usuario";
-            Evento evento = new Evento(alteracao, atendimento);
-            alteracao+=": "+a.getIdUsuario().getNomeCompleto()+"para ->"
-            +atendimento.getIdUsuario().getNomeCompleto()+"\n";
-            evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
-            evRepositorio.save(evento);
-
+        }else if(a.getIdUsuario()!=null && atendimento.getIdUsuario() != null){
+            if(!a.getIdUsuario().equals(atendimento.getIdUsuario())) {
+                alteracao="Alteração de usuario";
+                Evento evento = new Evento(alteracao, atendimento);
+                alteracao+=": "+a.getIdUsuario().getNomeCompleto()+"para ->"
+                +atendimento.getIdUsuario().getNomeCompleto()+"\n";
+                evento.setDescricaoTextual(format+alteracao+descricaoDoAtendimento);
+                evRepositorio.save(evento);
+            
+            }
         }
         if(!a.getIdCategoria().equals(atendimento.getIdCategoria())){
             alteracao="Alteração de categoria";
@@ -196,8 +198,10 @@ public class AtendimentoControlador {
     @GetMapping("/listar-atendimento-categoria{id}")
     public ModelAndView listarAtendimentoCategoria(@RequestParam Long id) {
         Categoria categoria = catRepositorio.findById(id).get();
-        List<Atendimento> atendimentos = atRepositorio.findByIdCategoria(categoria);
-        ModelAndView mv = new ModelAndView();
+       // List<Atendimento> atendimentos = atRepositorio.findByIdCategoria(categoria);
+       List<Atendimento> atendimentos = atRepositorio
+                    .getTodosAtendimentoDeStatusDiferenteDe(categoria); 
+       ModelAndView mv = new ModelAndView();
         mv.setViewName("lista-atendimento-categoria.html");
         mv.addObject("atendimentos", atendimentos);
         return mv;
