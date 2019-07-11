@@ -103,7 +103,7 @@ public class UsuarioControlador {
         mv.setViewName("redirect:/usuario/listar.html");
         return mv;
     }
-    @GetMapping("/total-atendimento{id}")
+    @GetMapping("/contar-atendimento-usuario{id}")
     public ModelAndView contarAtendimentoUsuario(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
         Usuario usuario= repositorio.findById(id).get();
