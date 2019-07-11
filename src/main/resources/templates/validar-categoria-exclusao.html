@@ -1,17 +1,16 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
-<h1>Selecione outra Categoria para os atendimentos do que deseja excluir</h1>
-<div class="col-md-8">
-    <label>Atendente: <select class="form-control" name="idNovo" th:field="${idNovo}">
-                    <option th:each="atopcao : ${atopcoes}"
-                    th:field="${idNovo}"
-                    th:value="${atopcao.id}"
-                    th:text="${atopcao.titulo}">
-                    </option>
-    </select></label>
-    <a th:href="@{/excluir/atendente.html(idAntigo=${param.id},idNovo=${idNovo})}" 
-    class="btn btn-dark">Salvar</a>
-    <a th:href="@{/atendente/listar.html}" class="btn btn-dark">Cancelar</a>
 
+<h1>Selecione outra categoria para assumir o lugar da que deseja excluir</h1><div class="col-md-8">
+    <form action="/excluir/categoria.html" method="GET">
+        <label>categoria: <select class="form-control" name="idNovo">
+                      <option th:each="catopcao : ${catopcoes}"
+                      th:value="${catopcao.id}"
+                      th:text="${catopcao.titulo}">
+                      </option>
+      </select></label>
+      <button type="submit" name="idAntigo" th:value="${idAntigo}">Salvar</button>
+      </form>  
+      <a th:href="@{/categoria/listar.html}" class="btn btn-dark">Cancelar</a>
 </div>
-
+  
   <div th:replace="fragments/rodape :: rodape"></div>

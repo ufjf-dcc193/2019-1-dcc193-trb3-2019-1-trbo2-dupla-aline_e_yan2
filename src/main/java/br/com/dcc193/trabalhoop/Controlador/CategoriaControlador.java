@@ -89,10 +89,13 @@ public class CategoriaControlador {
 
    @GetMapping(value = { "/excluir.html" })
    public ModelAndView excluir(@RequestParam Long id) {
-       ModelAndView mv = new ModelAndView();
-       repositorio.deleteById(id);
-       mv.setViewName("redirect:/categoria/listar.html");
-       return mv;
+    ModelAndView mv = new ModelAndView();
+    Long idNovo= (long) -1;
+    mv.addObject("idAntigo", id);
+    mv.addObject("idNovo", idNovo);
+    mv.addObject("catopcoes", repositorio.pegarCategoriaDiferenteDeId(id));
+    mv.setViewName("validar-categoria-exclusao.html");
+    return mv;
    }
    
 }

@@ -1,16 +1,15 @@
 <div th:replace="fragments/cabecalho :: cabecalho"></div>
 <h1>Selecione outro atendente para assumir os atendimentos do que deseja excluir</h1><div class="col-md-8">
-    <label>Atendente: <select class="form-control" name="idNovo" th:field="${idNovo}">
+  <form action="/excluir/atendente.html" method="GET">
+      <label>Atendente: <select class="form-control" name="idNovo">
                     <option th:each="atopcao : ${atopcoes}"
-                    th:field="${idNovo}"
                     th:value="${atopcao.id}"
                     th:text="${atopcao.nomeCompleto}">
                     </option>
     </select></label>
-    <a th:href="@{/excluir/atendente.html(idAntigo=${param.id},idNovo=${idNovo})}" 
-    class="btn btn-dark">Salvar</a>
+    <button type="submit" name="idAntigo" th:value="${idAntigo}">Salvar</button>
+    </form>  
     <a th:href="@{/atendente/listar.html}" class="btn btn-dark">Cancelar</a>
-
 </div>
 
   <div th:replace="fragments/rodape :: rodape"></div>

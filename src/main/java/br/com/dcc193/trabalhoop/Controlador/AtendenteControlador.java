@@ -100,8 +100,11 @@ public class AtendenteControlador {
     @GetMapping(value = { "/excluir.html" })
     public ModelAndView excluir(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
-        repositorio.deleteById(id);
-        mv.setViewName("redirect:/atendente/listar.html");
+        Long idNovo= (long) -1;
+        mv.addObject("idAntigo", id);
+        mv.addObject("idNovo", idNovo);
+        mv.addObject("atopcoes", repositorio.pegarAtendentesDiferenteDeId(id));
+        mv.setViewName("validar-atendente-exclusao.html");
         return mv;
     }
     @GetMapping("/total-atendimento{id}")

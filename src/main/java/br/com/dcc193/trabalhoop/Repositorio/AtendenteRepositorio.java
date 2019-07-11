@@ -1,5 +1,7 @@
 package br.com.dcc193.trabalhoop.Repositorio;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +20,6 @@ public interface AtendenteRepositorio extends JpaRepository<Atendente,Long> {
     @Query("SELECT a FROM Atendente a WHERE a.email =:email and a.codigoAcesso =:codigoAcesso")
     Atendente getAtendenteByEmailAndSenha(@Param("email") String email,
      @Param("codigoAcesso") String codigoAcesso);
-    
+    @Query("SELECT a FROM Atendente a WHERE a.id!=:idAtendente")
+    List<Atendente> pegarAtendentesDiferenteDeId(@Param("idAtendente") Long id);
 }

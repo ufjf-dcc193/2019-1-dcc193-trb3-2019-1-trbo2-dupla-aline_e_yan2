@@ -26,7 +26,7 @@ import br.com.dcc193.trabalhoop.Repositorio.UsuarioRepositorio;
  */
 
 @Controller
-@RequestMapping("/exclusao")
+@RequestMapping("/excluir")
 public class ExclusaoControlador {
 
     @Autowired
