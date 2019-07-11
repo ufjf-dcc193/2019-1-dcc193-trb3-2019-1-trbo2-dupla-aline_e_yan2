@@ -1,4 +1,5 @@
 package br.com.dcc193.trabalhoop.Controlador;
+
 import java.util.List;
 import java.util.Random;
 
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.dcc193.trabalhoop.Modelo.Atendimento;
 import br.com.dcc193.trabalhoop.Modelo.Usuario;
+import br.com.dcc193.trabalhoop.Repositorio.AtendimentoRepositorio;
 import br.com.dcc193.trabalhoop.Repositorio.UsuarioRepositorio;
 
 
@@ -28,6 +31,8 @@ public class UsuarioControlador {
 
     @Autowired
     private UsuarioRepositorio repositorio;
+    @Autowired
+    private AtendimentoRepositorio atRepositorio;
 
     @RequestMapping({ "", "/", "/index.html" })
     public ModelAndView atividadeIndex() {
@@ -96,6 +101,15 @@ public class UsuarioControlador {
         ModelAndView mv = new ModelAndView();
         repositorio.deleteById(id);
         mv.setViewName("redirect:/usuario/listar.html");
+        return mv;
+    }
+    @GetMapping("/total-atendimento{id}")
+    public ModelAndView contarAtendimentoUsuario(@RequestParam Long id) {
+        ModelAndView mv = new ModelAndView();
+        Usuario usuario= repositorio.findById(id).get();
+        List<Atendimento> atendimentos = atRepositorio.findByIdUsuario(usuario);
+        mv.addObject("contagem", (Integer)atendimentos.size()); 
+        mv.setViewName("atendimento-usuario.html");        
         return mv;
     }
     
