@@ -31,3 +31,4 @@ Sistema para gerir atendimento. O atendente faz o cadastro na página principal,
 
 Nesta página principal encontra um painel com Atendimento, Usuário, Atendente e Categoria. Em cada página o atendente pode realizar ações de acordo com a necessidade do seu trabalho.
 
+Para excluir usuário, categoria e atendente foi necessário tratar cada caso. Para usuário setamos o valor do atendimento para null. Para categoria e atendente é necessário escolher um novo atendente e uma nova categoria antes de excluir.
