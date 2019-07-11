@@ -96,13 +96,7 @@ public class UsuarioControlador {
         return mv;
     }
 
-    @GetMapping(value = { "/excluir.html" })
-    public ModelAndView excluir(@RequestParam Long id) {
-        ModelAndView mv = new ModelAndView();
-        repositorio.deleteById(id);
-        mv.setViewName("redirect:/usuario/listar.html");
-        return mv;
-    }
+    
     @GetMapping("/contar-atendimento-usuario{id}")
     public ModelAndView contarAtendimentoUsuario(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();

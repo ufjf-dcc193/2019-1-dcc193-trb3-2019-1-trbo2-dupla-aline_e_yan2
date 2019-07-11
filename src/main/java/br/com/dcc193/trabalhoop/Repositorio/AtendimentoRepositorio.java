@@ -37,4 +37,6 @@ public interface AtendimentoRepositorio extends JpaRepository<Atendimento,Long>{
     List<Atendimento> getTodosAtendimentosDiferentesDeFechado(@Param("atendente") Atendente atendente);
 
     List<Atendimento> findByIdUsuario(Usuario idUsuario);
+    List<Atendimento> findByIdAtendente(Atendente idAtendente);
+    List<Atendimento> findByIdCategoria(Categoria idCategoria);
 }

@@ -29,7 +29,7 @@
                     <td th:text=*{email}></td>
                     <td><a th:href="@{/usuario/editar.html(id=${usuario.id})}">
                         <button>Editar</button></a></td>
-                    <td><a th:href="@{/usuario/excluir.html(id=${usuario.id})}">
+                    <td><a th:href="@{/excluir/usuario.html(idUsuario=${usuario.id})}">
                         <button>Excluir</button></a></td>
                      <td><a th:href="@{/usuario/contar-atendimento-usuario.html(id=${usuario.id})}">
                         <button>Total de Atendimentos</button></a></td>
